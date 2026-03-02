@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HVAC Solutions – Complete HVAC & Filtration Solutions Partner</title>
+<style>
+  :root {
+    --navy: #0d1f35;
+    --teal: #2abfbf;
+    --teal-dark: #1f9e9e;
+    --teal-light: #e0f7f7;
+    --gray-bg: #f4f6f9;
+    --white: #ffffff;
+    --text-dark: #0d1f35;
+    --text-mid: #4a5568;
+    --text-light: #718096;
+    --card-border: #e2e8f0;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(13,31,53,0.10);
+    --shadow-lg: 0 8px 40px rgba(13,31,53,0.15);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--text-dark); background: var(--white); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e8edf3; padding: 0 40px; height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(13,31,53,0.12); }
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; color: var(--text-dark); text-decoration: none; }
+  .nav-logo img.logo-img { height: 38px; width: auto; display: block; }
+  .nav-logo .logo-icon { width: 34px; height: 34px; background: var(--navy); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--teal); font-weight: 900; font-size: 16px; }
+  .nav-links { display: flex; list-style: none; gap: 36px; }
+  .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--teal); }
+  .btn-quote { background: var(--teal); color: white; border: none; padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+  .btn-quote:hover { background: var(--teal-dark); transform: translateY(-1px); }
+
+  /* HERO */
+  #hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 80px 20px 60px; }
+  .hero-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(13,31,53,0.90) 0%, rgba(13,31,53,0.80) 50%, rgba(13,31,53,0.88) 100%); }
+  .hero-dots { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(42,191,191,0.18) 1px, transparent 1px); background-size: 32px 32px; pointer-events: none; }
+  .hero-content { position: relative; z-index: 2; text-align: center; max-width: 680px; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(42,191,191,0.15); border: 1px solid rgba(42,191,191,0.35); color: var(--teal); padding: 8px 18px; border-radius: 100px; font-size: 13px; font-weight: 500; margin-bottom: 32px; animation: fadeDown 0.8s ease both; }
+  .hero-badge svg { width: 14px; height: 14px; animation: spin 4s linear infinite; }
+  .hero-title { font-size: clamp(38px, 6vw, 60px); font-weight: 800; color: white; line-height: 1.15; margin-bottom: 24px; animation: fadeUp 0.9s ease 0.2s both; }
+  .hero-title .teal { color: var(--teal); }
+  .hero-sub { font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 520px; margin: 0 auto 40px; animation: fadeUp 0.9s ease 0.35s both; }
+  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.9s ease 0.5s both; }
+  .btn-primary { background: var(--teal); color: white; padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 600; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
+  .btn-primary:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(42,191,191,0.35); }
+  .btn-outline { background: transparent; color: white; padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 600; border: 1.5px solid rgba(255,255,255,0.4); cursor: pointer; text-decoration: none; transition: all 0.2s; }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+  .hero-divider { position: relative; z-index: 2; width: 100%; max-width: 680px; height: 1px; background: rgba(255,255,255,0.12); margin: 50px auto 40px; animation: fadeUp 0.9s ease 0.6s both; }
+  .hero-stats { position: relative; z-index: 2; display: flex; gap: 60px; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.9s ease 0.7s both; }
+  .stat-item { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .stat-icon { color: var(--teal); } .stat-icon svg { width: 24px; height: 24px; }
+  .stat-num { font-size: 28px; font-weight: 800; color: white; line-height: 1; }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.5); }
+  .scroll-indicator { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 2; }
+  .scroll-mouse { width: 22px; height: 34px; border: 2px solid rgba(255,255,255,0.3); border-radius: 11px; display: flex; justify-content: center; padding-top: 6px; }
+  .scroll-dot { width: 4px; height: 8px; background: rgba(255,255,255,0.5); border-radius: 2px; animation: scrollBounce 2s ease infinite; }
+
+  /* SHARED */
+  section { padding: 90px 40px; }
+  .section-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--teal-light); color: var(--teal-dark); padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 600; letter-spacing: 0.03em; margin-bottom: 20px; }
+  .section-tag svg { width: 13px; height: 13px; }
+  .section-head { font-size: clamp(28px, 4vw, 40px); font-weight: 800; color: var(--text-dark); line-height: 1.2; margin-bottom: 16px; }
+  .section-head .teal { color: var(--teal); }
+  .section-sub { font-size: 15px; color: var(--text-light); line-height: 1.7; max-width: 560px; margin: 0 auto; }
+  .text-center { text-align: center; }
+  .btn-teal { background: var(--teal); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
+  .btn-teal:hover { background: var(--teal-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(42,191,191,0.3); }
+  .btn-outline-dark { background: transparent; color: var(--text-dark); padding: 11px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; border: 1.5px solid var(--card-border); cursor: pointer; text-decoration: none; transition: border-color 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-outline-dark:hover { border-color: var(--text-dark); }
+  .btn-outline-white { background: transparent; color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; border: 1.5px solid rgba(255,255,255,0.35); cursor: pointer; text-decoration: none; transition: all 0.2s; }
+  .btn-outline-white:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+  /* FILTER SOLUTIONS */
+  #filters { background: var(--gray-bg); }
+  .filter-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto 32px; }
+  .filter-card { background: white; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--card-border); transition: transform 0.3s, box-shadow 0.3s; }
+  .filter-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  .filter-card-img-wrap { overflow: hidden; height: 190px; }
+  .filter-card-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+  .filter-card:hover .filter-card-img { transform: scale(1.05); }
+  .filter-card-body { padding: 20px; }
+  .filter-card-title-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .filter-card-title-row svg { width: 16px; height: 16px; color: var(--teal); }
+  .filter-card-title { font-size: 15px; font-weight: 700; }
+  .filter-card-desc { font-size: 13px; color: var(--text-light); margin-bottom: 14px; }
+  .grade-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .grade-tag { padding: 4px 10px; border-radius: 100px; border: 1px solid #d1dae6; font-size: 12px; font-weight: 500; color: var(--text-mid); background: var(--gray-bg); }
+
+  /* PAMPHLET BAR */
+  .pamphlet-bar { max-width: 1100px; margin: 0 auto 48px; background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 100%); border-radius: 14px; padding: 24px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .pamphlet-bar-left { display: flex; align-items: center; gap: 16px; }
+  .pamphlet-icon { width: 48px; height: 48px; background: rgba(42,191,191,0.15); border: 1px solid rgba(42,191,191,0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .pamphlet-icon svg { width: 22px; height: 22px; color: var(--teal); }
+  .pamphlet-title { font-size: 16px; font-weight: 700; color: white; margin-bottom: 4px; }
+  .pamphlet-sub { font-size: 13px; color: rgba(255,255,255,0.55); }
+  .btn-download { background: white; color: var(--teal-dark); padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 700; border: 2px solid var(--teal); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
+  .btn-download:hover { background: var(--teal); color: white; transform: translateY(-1px); }
+  .btn-download svg { width: 16px; height: 16px; }
+
+  /* FULL SERVICE */
+  .full-service-box { background: var(--teal-light); border-radius: 16px; padding: 40px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .full-service-title { font-size: 24px; font-weight: 800; color: var(--text-dark); margin-bottom: 14px; }
+  .full-service-desc { font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 24px; }
+  .service-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .service-2x2-item { background: white; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; border: 1px solid rgba(42,191,191,0.2); transition: box-shadow 0.2s; }
+  .service-2x2-item:hover { box-shadow: 0 4px 16px rgba(42,191,191,0.2); }
+  .service-2x2-item svg { width: 22px; height: 22px; color: var(--teal); }
+
+  /* RAILWAY */
+  #railway { background: var(--white); }
+  .railway-inner { max-width: 1100px; margin: 0 auto; }
+  .railway-header { text-align: center; margin-bottom: 40px; }
+  .train-image-box { border-radius: 16px; overflow: hidden; margin-bottom: 40px; position: relative; height: 340px; }
+  .train-image-box img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+  .train-image-box::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,31,53,0.65) 0%, transparent 50%); pointer-events: none; }
+  .train-overlay { position: absolute; bottom: 28px; left: 28px; z-index: 10; }
+  .train-label { display: inline-block; background: rgba(13,31,53,0.85); backdrop-filter: blur(8px); color: white; padding: 12px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); max-width: 460px; }
+  .train-label-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .train-label-sub { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.5; }
+  .capability-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+  .capability-card { border: 1px solid var(--card-border); border-radius: var(--radius); padding: 20px; transition: border-color 0.2s, box-shadow 0.2s; }
+  .capability-card:hover { border-color: var(--teal); box-shadow: 0 4px 20px rgba(42,191,191,0.12); }
+  .capability-icon { width: 36px; height: 36px; background: var(--teal-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .capability-icon svg { width: 18px; height: 18px; color: var(--teal); }
+  .capability-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .capability-desc { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+  .railway-cta { background: white; border: 1px solid var(--card-border); border-radius: 16px; padding: 36px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; box-shadow: var(--shadow); }
+  .railway-cta-title { font-size: 22px; font-weight: 800; margin-bottom: 12px; }
+  .railway-cta-sub { font-size: 14px; color: var(--text-light); margin-bottom: 24px; line-height: 1.6; }
+  .cta-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .cta-checks { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .cta-checks li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-mid); }
+  .cta-checks li svg { width: 18px; height: 18px; color: var(--teal); flex-shrink: 0; }
+
+  /* BUS AC */
+  #bus { background: var(--gray-bg); padding: 90px 40px; }
+  .bus-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .bus-img-box { border-radius: 20px; overflow: hidden; height: 400px; position: relative; }
+  .bus-img-box img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 0.5s; }
+  .bus-img-box:hover img { transform: scale(1.03); }
+  .ev-badge { position: absolute; top: 16px; left: 16px; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); color: #7de87d; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; border: 1px solid rgba(125,232,125,0.3); z-index: 2; }
+  .eco-badge { position: absolute; bottom: 16px; right: 16px; background: white; padding: 10px 16px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; z-index: 2; }
+  .eco-badge svg { width: 18px; height: 18px; color: var(--teal); }
+  .eco-badge-sub { font-size: 11px; color: var(--text-light); font-weight: 400; }
+  .bus-content .section-head { text-align: left; }
+  .bus-content .section-sub { text-align: left; margin: 0 0 32px; }
+  .bus-features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px; }
+  .bus-feature { display: flex; gap: 12px; }
+  .bus-feature-icon { width: 32px; height: 32px; flex-shrink: 0; background: var(--teal-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+  .bus-feature-icon svg { width: 16px; height: 16px; color: var(--teal); }
+  .bus-feature-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .bus-feature-desc { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+
+  /* SPECIAL */
+  #special { background: var(--white); }
+  .special-inner { max-width: 1100px; margin: 0 auto; }
+  .special-header { text-align: center; margin-bottom: 48px; }
+  .special-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 48px; }
+  .special-card { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--card-border); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
+  .special-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .special-card-img-wrap { height: 160px; overflow: hidden; position: relative; }
+  .special-card-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 0.4s; }
+  .special-card:hover .special-card-img-wrap img { transform: scale(1.06); }
+  .special-card-icon { position: absolute; bottom: 12px; left: 12px; width: 34px; height: 34px; background: var(--navy); border-radius: 8px; display: flex; align-items: center; justify-content: center; z-index: 2; }
+  .special-card-icon svg { width: 16px; height: 16px; color: var(--teal); }
+  .special-card-body { padding: 16px; }
+  .special-card-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .special-card-desc { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+  .challenge-box { background: var(--navy); border-radius: 20px; padding: 60px 40px; text-align: center; }
+  .challenge-icon { width: 56px; height: 56px; background: rgba(255,255,255,0.1); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+  .challenge-icon svg { width: 26px; height: 26px; color: rgba(255,255,255,0.7); }
+  .challenge-title { font-size: 28px; font-weight: 800; color: white; margin-bottom: 16px; }
+  .challenge-sub { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 520px; margin: 0 auto 36px; line-height: 1.7; }
+  .challenge-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer { background: var(--navy); padding: 64px 40px 36px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 32px; }
+  .footer-brand-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; color: white; margin-bottom: 16px; }
+  .footer-brand-logo .logo-icon { width: 34px; height: 34px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--teal); font-weight: 900; font-size: 16px; }
+  .footer-brand-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7; }
+  .footer-col-title { font-size: 13px; font-weight: 700; color: white; margin-bottom: 18px; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { text-decoration: none; font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+  .footer-links a:hover { color: var(--teal); }
+  .footer-contact { display: flex; flex-direction: column; gap: 12px; }
+  .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+  .footer-contact-item svg { width: 16px; height: 16px; color: var(--teal); flex-shrink: 0; margin-top: 1px; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.35); }
+  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+  /* MODAL */
+  .modal-overlay { position: fixed; inset: 0; z-index: 2000; background: rgba(13,31,53,0.65); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal { background: white; border-radius: 20px; width: 100%; max-width: 580px; max-height: 92vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(13,31,53,0.3); transform: translateY(24px) scale(0.97); transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease; opacity: 0; }
+  .modal-overlay.open .modal { transform: translateY(0) scale(1); opacity: 1; }
+  .modal-header { padding: 32px 32px 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .modal-pretitle { display: inline-flex; align-items: center; gap: 6px; background: var(--teal-light); color: var(--teal-dark); padding: 5px 12px; border-radius: 100px; font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+  .modal-pretitle svg { width: 12px; height: 12px; }
+  .modal-title { font-size: 22px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+  .modal-subtitle { font-size: 13px; color: var(--text-light); }
+  .modal-close { width: 36px; height: 36px; background: var(--gray-bg); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s, transform 0.2s; color: var(--text-mid); }
+  .modal-close:hover { background: #e2e8f0; transform: rotate(90deg); }
+  .modal-close svg { width: 16px; height: 16px; }
+  .modal-body { padding: 28px 32px 32px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-row.single { grid-template-columns: 1fr; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+  .form-label span { color: var(--teal); }
+  .form-input, .form-select, .form-textarea { width: 100%; padding: 11px 14px; border: 1.5px solid var(--card-border); border-radius: 10px; font-size: 14px; font-family: var(--font-body); color: var(--text-dark); background: white; outline: none; appearance: none; transition: border-color 0.2s, box-shadow 0.2s; }
+  .form-input::placeholder, .form-textarea::placeholder { color: #b0bec5; }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(42,191,191,0.12); }
+  .form-input.error, .form-select.error, .form-textarea.error { border-color: #f56565; box-shadow: 0 0 0 3px rgba(245,101,101,0.1); }
+  .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23718096' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; cursor: pointer; }
+  .form-textarea { resize: vertical; min-height: 100px; }
+  .field-error { font-size: 11px; color: #f56565; display: none; margin-top: 2px; }
+  .field-error.show { display: block; }
+  .modal-divider { height: 1px; background: var(--card-border); margin: 20px 0; }
+  .modal-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .modal-note { font-size: 12px; color: var(--text-light); display: flex; align-items: center; gap: 6px; }
+  .modal-note svg { width: 14px; height: 14px; color: var(--teal); }
+  .btn-submit { background: var(--teal); color: white; padding: 13px 28px; border-radius: 10px; font-size: 14px; font-weight: 700; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; min-width: 160px; justify-content: center; }
+  .btn-submit:hover:not(:disabled) { background: var(--teal-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(42,191,191,0.35); }
+  .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+  .btn-submit .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.4); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
+  .btn-submit.loading .spinner { display: block; }
+  .btn-submit.loading .btn-label { display: none; }
+  .send-error { background: #fff5f5; border: 1px solid #fed7d7; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #c53030; margin-bottom: 16px; display: none; align-items: center; gap: 8px; }
+  .send-error.show { display: flex; }
+  .send-error svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scrollBounce { 0%, 100% { transform: translateY(0); opacity: 0.8; } 50% { transform: translateY(8px); opacity: 0.3; } }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right { opacity: 0; transform: translateX(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+  .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; } .delay-3 { transition-delay: 0.3s; } .delay-4 { transition-delay: 0.4s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; } .nav-links { display: none; } section { padding: 64px 20px; }
+    .filter-cards, .full-service-box, .railway-cta, .bus-inner { grid-template-columns: 1fr; }
+    .capability-grid { grid-template-columns: 1fr 1fr; } .special-cards { grid-template-columns: 1fr 1fr; } .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .special-cards, .capability-grid, .footer-top { grid-template-columns: 1fr; }
+    .hero-stats { gap: 32px; } .form-row { grid-template-columns: 1fr; }
+    .modal-header { padding: 24px 20px 0; } .modal-body { padding: 20px; }
+    .modal-footer { flex-direction: column-reverse; align-items: stretch; } .btn-submit { width: 100%; }
+    .pamphlet-bar { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="quoteModal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-pretitle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Free Consultation
+        </div>
+        <h2 class="modal-title">Get a Quote</h2>
+        <p class="modal-subtitle">Fill in the details and our team will respond within 24 hours.</p>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-form-wrap" id="modalFormWrap">
+        <form id="quoteForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="fieldName">Full Name <span>*</span></label>
+              <input class="form-input" id="fieldName" type="text" placeholder="John Smith" autocomplete="name"/>
+              <span class="field-error" id="errName">Please enter your name.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fieldCompany">Company</label>
+              <input class="form-input" id="fieldCompany" type="text" placeholder="Acme Corp" autocomplete="organization"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="fieldEmail">Email Address <span>*</span></label>
+              <input class="form-input" id="fieldEmail" type="email" placeholder="john@company.com" autocomplete="email"/>
+              <span class="field-error" id="errEmail">Please enter a valid email.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fieldPhone">Phone Number</label>
+              <input class="form-input" id="fieldPhone" type="tel" placeholder="+91 98765 43210" autocomplete="tel"/>
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="form-group">
+              <label class="form-label" for="fieldService">Product / Service Type <span>*</span></label>
+              <select class="form-select" id="fieldService">
+                <option value="" disabled selected>Select a solution…</option>
+                <option value="Filter Solutions – Coarse (G1–G4)">Filter Solutions – Coarse (G1–G4)</option>
+                <option value="Filter Solutions – Fine (F1–F5)">Filter Solutions – Fine (F1–F5)</option>
+                <option value="Filter Solutions – High-Efficiency (HEPA/ULPA)">Filter Solutions – High-Efficiency (HEPA/ULPA)</option>
+                <option value="Railway / Metro HVAC Systems">Railway / Metro HVAC Systems</option>
+                <option value="Bus AC – EV Fleet">Bus AC – EV Fleet</option>
+                <option value="Bus AC – Traditional Fleet">Bus AC – Traditional Fleet</option>
+                <option value="Bus AC – Retrofit">Bus AC – Retrofit</option>
+                <option value="Special Purpose – Data Center">Special Purpose – Data Center</option>
+                <option value="Special Purpose – Industrial Facility">Special Purpose – Industrial Facility</option>
+                <option value="Special Purpose – Healthcare / Clean Room">Special Purpose – Healthcare / Clean Room</option>
+                <option value="Special Purpose – Cold Storage">Special Purpose – Cold Storage</option>
+                <option value="Other / Custom Requirement">Other / Custom Requirement</option>
+              </select>
+              <span class="field-error" id="errService">Please select a service type.</span>
+            </div>
+          </div>
+          <div class="form-row single">
+            <div class="form-group">
+              <label class="form-label" for="fieldMessage">Project Details <span>*</span></label>
+              <textarea class="form-textarea" id="fieldMessage" placeholder="Describe your project — application, scale, timeline, or any specific requirements…"></textarea>
+              <span class="field-error" id="errMessage">Please describe your project.</span>
+            </div>
+          </div>
+          <div class="modal-divider"></div>
+          <div class="modal-footer">
+            <div class="modal-note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              Your data is secure &amp; never shared.
+            </div>
+            <button type="submit" class="btn-submit" id="btnSubmit">
+              <span class="btn-label" style="display:flex;align-items:center;gap:8px;">
+                Send Request
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </span>
+              <span class="spinner"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img src="assets/image/logo.png" alt="Duo Tempus Logo" class="logo-img"/>
+    Duo Tempus
+  </a>
+  <ul class="nav-links">
+    <li><a href="#filters">Filter Solutions</a></li>
+    <li><a href="#railway">Railway HVAC</a></li>
+    <li><a href="#bus">Bus AC Solutions</a></li>
+    <li><a href="#special">Special Purpose</a></li>
+  </ul>
+  <button class="btn-quote open-modal">Get a Quote</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <img class="hero-bg-img" src="assets/image/hero-bg.png" alt="Sustainable HVAC Refrigerants 0 GWP 0 ODP"/>
+  <div class="hero-overlay"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+      Sustainable Solutions · 0 GWP &amp; 0 ODP Refrigerants
+    </div>
+    <h1 class="hero-title">Complete HVAC &amp; Filtration<br><span class="teal">Solutions Partner</span></h1>
+    <p class="hero-sub">From industrial filters to railway HVAC systems, we deliver end-to-end engineering solutions with eco-friendly refrigerants for a sustainable future.</p>
+    <div class="hero-btns">
+      <button class="btn-primary open-modal">
+        Explore Solutions
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <button class="btn-outline open-modal">Contact Our Engineers</button>
+    </div>
+  </div>
+  <div class="hero-divider"></div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="stat-num">17+</div><div class="stat-label">Filter Types</div></div>
+    <div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="stat-num">100%</div><div class="stat-label">Lifecycle Support</div></div>
+    <div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 20.7A7 7 0 1117 6.3M12 12v8M12 12l4-4"/></svg></div><div class="stat-num">0</div><div class="stat-label">GWP &amp; ODP</div></div>
+  </div>
+  <div class="scroll-indicator"><div class="scroll-mouse"><div class="scroll-dot"></div></div></div>
+</section>
+
+<!-- FILTER SOLUTIONS -->
+<section id="filters">
+  <div class="text-center reveal" style="margin-bottom:48px;">
+    <div class="section-tag">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+      Complete Filtration Range
+    </div>
+    <h2 class="section-head">17 Filter Types, <span class="teal">One Supplier</span></h2>
+    <p class="section-sub">From design to delivery, we handle every aspect of your filtration needs. Using premium media from trusted partners like Freudenberg, we manufacture and supply filters that meet the most demanding specifications.</p>
+  </div>
+
+  <div class="filter-cards">
+    <div class="filter-card reveal delay-1">
+      <div class="filter-card-img-wrap">
+        <img class="filter-card-img" src="assets/image/coarse-filter.png" alt="Coarse Filter G1-G4"/>
+      </div>
+      <div class="filter-card-body">
+        <div class="filter-card-title-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          <span class="filter-card-title">Coarse Filters</span>
+        </div>
+        <p class="filter-card-desc">Pre-filtration for large particles</p>
+        <div class="grade-tags"><span class="grade-tag">G1</span><span class="grade-tag">G2</span><span class="grade-tag">G3</span><span class="grade-tag">G4</span></div>
+      </div>
+    </div>
+    <div class="filter-card reveal delay-2">
+      <div class="filter-card-img-wrap">
+        <img class="filter-card-img" src="assets/image/fine-filter.png" alt="Fine Filter F1-F5"/>
+      </div>
+      <div class="filter-card-body">
+        <div class="filter-card-title-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          <span class="filter-card-title">Fine Filters</span>
+        </div>
+        <p class="filter-card-desc">Medium efficiency filtration</p>
+        <div class="grade-tags"><span class="grade-tag">F1</span><span class="grade-tag">F2</span><span class="grade-tag">F3</span><span class="grade-tag">F4</span><span class="grade-tag">F5</span></div>
+      </div>
+    </div>
+    <div class="filter-card reveal delay-3">
+      <div class="filter-card-img-wrap">
+        <img class="filter-card-img" src="assets/image/hepa-filter.png" alt="HEPA ULPA Filter"/>
+      </div>
+      <div class="filter-card-body">
+        <div class="filter-card-title-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="filter-card-title">High-Efficiency Filters</span>
+        </div>
+        <p class="filter-card-desc">HEPA &amp; ULPA grade filtration</p>
+        <div class="grade-tags"><span class="grade-tag">EDA</span><span class="grade-tag">EPA</span><span class="grade-tag">HEPA</span><span class="grade-tag">UEPA</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!--
+    ═══════════════════════════════════════════
+    PAMPHLET DOWNLOAD
+    Place your PDF at: assets/image/pamphlet.pdf
+    The download button is already linked!
+    ═══════════════════════════════════════════
+  -->
+  <div class="pamphlet-bar reveal">
+    <div class="pamphlet-bar-left">
+      <div class="pamphlet-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <div>
+        <div class="pamphlet-title">Filter Solutions Brochure</div>
+        <div class="pamphlet-sub">Complete product catalogue · Specifications · Grade charts · Application guide · PDF</div>
+      </div>
+    </div>
+    <a href="assets/image/pamphlet.pdf" download="HVAC-Filter-Solutions-Brochure.pdf" class="btn-download">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Brochure
+    </a>
+  </div>
+
+  <div class="full-service-box reveal">
+    <div>
+      <h3 class="full-service-title">Full-Service Filtration Partner</h3>
+      <p class="full-service-desc">We handle everything from filter design and selection to manufacturing and supply. Our expertise with premium media from partners like Freudenberg ensures your filtration needs are met with precision.</p>
+      <button class="btn-teal open-modal">
+        Request Filter Consultation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+    <div class="service-2x2">
+      <div class="service-2x2-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>Design</div>
+      <div class="service-2x2-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>Selection</div>
+      <div class="service-2x2-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>Manufacturing</div>
+      <div class="service-2x2-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>Supply</div>
+    </div>
+  </div>
+</section>
+
+<!-- RAILWAY HVAC -->
+<section id="railway">
+  <div class="railway-inner">
+    <div class="railway-header reveal">
+      <div class="section-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16M12 3v16M4 19l2-2M20 19l-2-2"/></svg>
+        Railway &amp; Metro Solutions
+      </div>
+      <h2 class="section-head">Complete HVAC <span class="teal">Lifecycle Partner</span></h2>
+      <p class="section-sub">From the first tender to decades of service, we're with you at every stage. Our railway and metro HVAC expertise covers the entire product lifecycle.</p>
+    </div>
+    <div class="train-image-box reveal">
+      <img src="assets/image/railway-train.png" alt="Metro Train with Rooftop HVAC"/>
+      <div class="train-overlay">
+        <div class="train-label">
+          <div class="train-label-title">Rooftop HVAC Systems</div>
+          <div class="train-label-sub">Complete climate control solutions designed specifically for railway and metro applications, built to withstand demanding conditions.</div>
+        </div>
+      </div>
+    </div>
+    <div class="capability-grid">
+      <div class="capability-card reveal delay-1">
+        <div class="capability-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="capability-title">Tendering &amp; Documentation</div>
+        <div class="capability-desc">Technical proposals, CVQs, and all project documentation</div>
+      </div>
+      <div class="capability-card reveal delay-2">
+        <div class="capability-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div class="capability-title">CAD &amp; CFD Analysis</div>
+        <div class="capability-desc">Detailed 3D modeling and computational fluid dynamics</div>
+      </div>
+      <div class="capability-card reveal delay-3">
+        <div class="capability-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></div>
+        <div class="capability-title">Structural &amp; Noise Analysis</div>
+        <div class="capability-desc">Vibration calculations and acoustic optimization</div>
+      </div>
+      <div class="capability-card reveal delay-1">
+        <div class="capability-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        <div class="capability-title">Component Selection</div>
+        <div class="capability-desc">Compressors, refrigeration, and all HVAC components</div>
+      </div>
+      <div class="capability-card reveal delay-2">
+        <div class="capability-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
+        <div class="capability-title">Prototyping &amp; Testing</div>
+        <div class="capability-desc">Build, test, and validate before production</div>
+      </div>
+      <div class="capability-card reveal delay-3">
+        <div class="capability-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="capability-title">Retrofitting &amp; Service</div>
+        <div class="capability-desc">On-site support throughout the product lifecycle</div>
+      </div>
+    </div>
+    <div class="railway-cta reveal">
+      <div>
+        <h3 class="railway-cta-title">Ready to discuss your railway HVAC project?</h3>
+        <p class="railway-cta-sub">Our engineering team is ready to support you from concept to commissioning and beyond.</p>
+        <div class="cta-btns">
+          <button class="btn-teal open-modal">Start Your Project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+          <a href="assets/image/pamphlet.pdf" download="HVAC-Capabilities.pdf" class="btn-outline-dark">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Capabilities
+          </a>
+        </div>
+      </div>
+      <ul class="cta-checks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>Full technical documentation support</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>In-house CAD and CFD capabilities</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>Proven railway &amp; metro experience</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>Long-term service partnerships</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- BUS AC -->
+<section id="bus">
+  <div class="bus-inner">
+    <div class="reveal-left">
+      <div class="bus-img-box">
+        <img src="assets/image/bus-ev.png" alt="Electric EV Bus with AC System"/>
+        <div class="ev-badge">EV Optimized</div>
+        <div class="eco-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 20.7A7 7 0 1117 6.3M12 12v8M12 12l4-4"/></svg>
+          <div><div>Eco-Certified</div><div class="eco-badge-sub">Green refrigerants</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="bus-content reveal-right">
+      <div class="section-tag" style="margin-bottom:20px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        Bus AC Solutions
+      </div>
+      <h2 class="section-head">Keep Every Passenger <span class="teal">Cool &amp; Comfortable</span></h2>
+      <p class="section-sub">Specializing in bus air conditioning for traditional and EV fleets. From new installations to retrofits, we deliver complete AC solutions for city transit, coaches, and specialty vehicles.</p>
+      <div class="bus-features">
+        <div class="bus-feature"><div class="bus-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div><div class="bus-feature-title">EV Bus Specialists</div><div class="bus-feature-desc">Purpose-built AC solutions optimized for electric bus energy efficiency and range preservation</div></div></div>
+        <div class="bus-feature"><div class="bus-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><div><div class="bus-feature-title">Retrofitting Experts</div><div class="bus-feature-desc">Upgrade existing buses with modern, efficient AC systems without replacing the entire fleet</div></div></div>
+        <div class="bus-feature"><div class="bus-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div><div class="bus-feature-title">New Installations</div><div class="bus-feature-desc">Complete AC kit installation for new buses, travelers, and specialty vehicles</div></div></div>
+        <div class="bus-feature"><div class="bus-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 20.7A7 7 0 1117 6.3M12 12v8M12 12l4-4"/></svg></div><div><div class="bus-feature-title">Sustainable Solutions</div><div class="bus-feature-desc">Eco-friendly refrigerants and energy-efficient designs for greener transportation</div></div></div>
+      </div>
+      <button class="btn-teal open-modal">
+        Request a Fleet Assessment
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIAL PURPOSE -->
+<section id="special">
+  <div class="special-inner">
+    <div class="special-header reveal">
+      <div class="section-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Custom Solutions</div>
+      <h2 class="section-head">Special Purpose <span class="teal">HVAC Machines</span></h2>
+      <p class="section-sub">Don't see your application listed? We specialize in solving unique climate control challenges. From concept to commissioning, we'll guide you to the perfect solution.</p>
+    </div>
+    <div class="special-cards">
+      <div class="special-card reveal delay-1">
+        <div class="special-card-img-wrap">
+          <img src="assets/image/data-center.png" alt="Data Center Precision Cooling"/>
+          <div class="special-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
+        </div>
+        <div class="special-card-body"><div class="special-card-title">Data Centers</div><div class="special-card-desc">Precision cooling for mission-critical IT infrastructure</div></div>
+      </div>
+      <div class="special-card reveal delay-2">
+        <div class="special-card-img-wrap">
+          <img src="assets/image/industrial.png" alt="Industrial HVAC Facility"/>
+          <div class="special-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+        </div>
+        <div class="special-card-body"><div class="special-card-title">Industrial Facilities</div><div class="special-card-desc">Heavy-duty HVAC for manufacturing environments</div></div>
+      </div>
+      <div class="special-card reveal delay-3">
+        <div class="special-card-img-wrap">
+          <img src="assets/image/healthcare.png" alt="Healthcare Clean Room HVAC"/>
+          <div class="special-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        </div>
+        <div class="special-card-body"><div class="special-card-title">Healthcare</div><div class="special-card-desc">Clean room and sterile environment climate control</div></div>
+      </div>
+      <div class="special-card reveal delay-4">
+        <div class="special-card-img-wrap">
+          <img src="assets/image/cold-storage.png" alt="Cold Storage Temperature Control"/>
+          <div class="special-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/></svg></div>
+        </div>
+        <div class="special-card-body"><div class="special-card-title">Cold Storage</div><div class="special-card-desc">Temperature-controlled logistics solutions</div></div>
+      </div>
+    </div>
+    <div class="challenge-box reveal">
+      <div class="challenge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+      <h3 class="challenge-title">Have a Unique HVAC Challenge?</h3>
+      <p class="challenge-sub">Whether you need a chiller for a data center, specialized cooling for clean rooms, or something entirely custom — we're here to help you define, design, and deliver exactly what you need.</p>
+      <div class="challenge-btns">
+        <button class="btn-teal open-modal">Discuss Your Project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        <a href="#railway" class="btn-outline-white">Browse Case Studies</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="assets/image/logo.png" alt="Duo Tempus Logo" style="height:42px;width:auto;display:block;background:white;border-radius:8px;padding:4px 8px;"/>
+          Duo Tempus
+        </div>
+        <p class="footer-brand-desc">Your complete partner for industrial filtration, railway HVAC, bus AC systems, and custom climate control solutions.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Solutions</div>
+        <ul class="footer-links"><li><a href="#filters">Filter Solutions</a></li><li><a href="#railway">Railway HVAC</a></li><li><a href="#bus">Bus AC Systems</a></li><li><a href="#special">Special Purpose</a></li></ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links"><li><a href="#">About Us</a></li><li><a href="#">Our Team</a></li><li><a href="#">Case Studies</a></li><li><a href="#">Careers</a></li></ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-contact">
+          <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span id="ftEmail" style="cursor:pointer;transition:color 0.2s;" onmouseover="this.style.color='#2abfbf'" onmouseout="this.style.color=''" onclick="window.location.href='mai'+'lto:duotempus.sa'+'les@gmai'+'l.com'">duotempus.sales&#64;gmail.com</span></div>
+          <!-- <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+91 7801993467</div> -->
+          <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>A-5,Param Logistics & Industrial Park, Degam Road,<br>Opp. Bharat Pertol pump,<br>Vapi Dist.Valsad,Gujarat-396195</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar shadow on scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => obs.observe(el));
+
+  // Animated counters — 3 stats only
+  function animateCounter(el, target, suffix, duration) {
+    let start = 0;
+    const step = ts => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / duration, 1);
+      el.textContent = Math.floor((1 - Math.pow(1-p, 3)) * target) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  let countersRan = false;
+  new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !countersRan) {
+      countersRan = true;
+      document.querySelectorAll('.stat-num').forEach((el, i) => {
+        animateCounter(el, [17, 100, 0][i], ['+', '%', ''][i], 1500);
+      });
+    }
+  }, { threshold: 0.5 }).observe(document.querySelector('.hero-stats'));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const t = document.querySelector(link.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // ════════════════════════════════════════════════
+  // MODAL
+  // ════════════════════════════════════════════════
+  const modal     = document.getElementById('quoteModal');
+  const btnSubmit = document.getElementById('btnSubmit');
+  const form      = document.getElementById('quoteForm');
+
+  function openModal() {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    formWrap.classList.remove('hide');
+    form.reset(); clearErrors();
+    btnSubmit.classList.remove('loading'); btnSubmit.disabled = false;
+  }
+  function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+
+  document.querySelectorAll('.open-modal').forEach(b => b.addEventListener('click', openModal));
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+  function showErr(f, e) { document.getElementById(f).classList.add('error'); document.getElementById(e).classList.add('show'); }
+  function clearErr(f, e) { document.getElementById(f).classList.remove('error'); document.getElementById(e).classList.remove('show'); }
+  function clearErrors() {
+    [['fieldName','errName'],['fieldEmail','errEmail'],['fieldService','errService'],['fieldMessage','errMessage']].forEach(([f,e]) => clearErr(f,e));
+  }
+
+  // Live validation on blur
+  document.getElementById('fieldName').addEventListener('blur', function() { this.value.trim() ? clearErr('fieldName','errName') : showErr('fieldName','errName'); });
+  document.getElementById('fieldEmail').addEventListener('blur', function() { /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value.trim()) ? clearErr('fieldEmail','errEmail') : showErr('fieldEmail','errEmail'); });
+  document.getElementById('fieldService').addEventListener('change', function() { this.value ? clearErr('fieldService','errService') : showErr('fieldService','errService'); });
+  document.getElementById('fieldMessage').addEventListener('blur', function() { this.value.trim() ? clearErr('fieldMessage','errMessage') : showErr('fieldMessage','errMessage'); });
+
+  // Submit → Open Gmail with all details pre-filled
+  form.addEventListener('submit', function(e) {
+    e.preventDefault(); clearErrors();
+
+    const name    = document.getElementById('fieldName').value.trim();
+    const email   = document.getElementById('fieldEmail').value.trim();
+    const company = document.getElementById('fieldCompany').value.trim();
+    const phone   = document.getElementById('fieldPhone').value.trim();
+    const service = document.getElementById('fieldService').value;
+    const message = document.getElementById('fieldMessage').value.trim();
+
+    let valid = true;
+    if (!name)    { showErr('fieldName','errName');       valid = false; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('fieldEmail','errEmail'); valid = false; }
+    if (!service) { showErr('fieldService','errService'); valid = false; }
+    if (!message) { showErr('fieldMessage','errMessage'); valid = false; }
+    if (!valid) return;
+
+    // Build Gmail compose URL with all details
+    const to      = 'duotempus.sales' + '@' + 'gmail.com';
+    const subject = `New Enquiry: ${service} – from ${name}`;
+    const body =
+      `Hi Duo Tempus Team,\n\n` +
+      `You have received a new project enquiry from your website.\n\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+      `CONTACT DETAILS\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+      `Name:          ${name}\n` +
+      `Company:       ${company || 'Not provided'}\n` +
+      `Email:         ${email}\n` +
+      `Phone:         ${phone || 'Not provided'}\n\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+      `ENQUIRY DETAILS\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+      `Service Type:  ${service}\n\n` +
+      `Project Details:\n${message}\n\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+      `Sent from: Duo Tempus Website`;
+
+    const gmailURL =
+      `https://mail.google.com/mail/?view=cm&fs=1` +
+      `&to=${encodeURIComponent(to)}` +
+      `&su=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`;
+
+    // Open Gmail compose directly — no success screen
+    window.open(gmailURL, '_blank');
+
+    // Close modal after opening Gmail
+    setTimeout(() => { closeModal(); }, 400);
+  });
+</script>
+</body>
+</html>
